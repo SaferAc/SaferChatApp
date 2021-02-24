@@ -1,0 +1,21 @@
+<div class="navBar">
+
+    <div id="heading"><a routerLink="/">ChatApp</a></div>
+
+  
+<div>
+    <a>¿Cambiar Nombre de Usuario?</a>
+
+    <input class="nameImput" 
+    [(ngModel)]="userName" 
+    (keydown)="handleSubmit($event)"
+    />
+    <button class="chatButton" 
+    (click)=send()>Enviar</button>
+
+</div>
+
+
+
+  
+</div>
