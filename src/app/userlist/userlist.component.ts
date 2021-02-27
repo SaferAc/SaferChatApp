@@ -11,13 +11,17 @@ import { ChatService } from "../chat.service";
 
 
 
-export class UserlistComponent implements OnInit {
+export class UserlistComponent implements OnInit, OnChanges {
 
   constructor(public chatService:ChatService) { }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.getUsers();
+  }
 
   ngOnInit(): void {
    
     this.getUsers();
+    this.getNewUser();
   
   }
 

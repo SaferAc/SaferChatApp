@@ -12,7 +12,7 @@ var io = require('socket.io')(server);
 io.on("connection", function (socket) {
   console.log('user connected');
   
-  socket.emit("test-event",'test data');
+  io.emit('usersUpdated');
 
   socket.on('new-message', (msg) => {
     console.log(msg);
@@ -25,7 +25,7 @@ io.on("connection", function (socket) {
    socket.on ('onDisconnect', async(id)=>{
      try {
       await  User.findByIdAndDelete(id['id']);
-      io.emit('usersUpdated', msg);
+      io.emit('usersUpdated');
      } catch (error) {
        console.log(error);
      }
