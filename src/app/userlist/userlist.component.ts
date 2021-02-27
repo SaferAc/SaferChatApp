@@ -32,5 +32,14 @@ export class UserlistComponent implements OnInit {
     )
   }
 
+  getNewUser(){
+    this.chatService.updateUsers().subscribe(
+      res=> {
+        this.getUsers();
+      },
+      err=> console.log(err)
+    )
+  }
+
 
   }

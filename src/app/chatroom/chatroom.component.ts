@@ -6,15 +6,10 @@ import { ChatService } from "../chat.service";
   templateUrl: './chatroom.component.html',
   styleUrls: ['./chatroom.component.sass']
 })
-export class ChatroomComponent implements OnInit, OnDestroy {
+export class ChatroomComponent implements OnInit {
 
   constructor(private chatService:ChatService) { }
-  ngOnDestroy(): void {
-
-    this.chatService.sendMessage('new-message','destoy');
-    
-    
-  }
+ 
 
   ngOnInit(): void {
     this.chatService.createUser();

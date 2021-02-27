@@ -83,9 +83,6 @@ createUser(){
 
 changeUserName(userName:string){
 
-  
-
-
   return this.http.put(this.URL_USERS+this.userId$,{name:userName}).subscribe(
     res=> { 
       this.nombre$= res['name']
@@ -94,6 +91,23 @@ changeUserName(userName:string){
     },
     err=> console.log(err)
   )
+}
+
+deleteUser(eventName:string){
+  const timestamp= this.getTimeStamp();
+  this.socket.emit(eventName,{
+    id: this.userId$,
+  });
+
+}
+
+
+updateUsers(){
+  return new Observable ((subscriber) => {
+      this.socket.on('usersUpdated', (message) => {
+          subscriber.next(message);
+      })
+  });
 }
 
 
@@ -113,13 +127,15 @@ getTimeStamp() {
 
 
 
- public getSocketMessages(){
+ getSocketMessages(){
         return new Observable ((subscriber) => {
             this.socket.on('new-message', (message) => {
                 subscriber.next(message);
             })
         });
     }
+  
+  
 
 
 }

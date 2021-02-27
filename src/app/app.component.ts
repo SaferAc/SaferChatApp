@@ -1,5 +1,8 @@
 import { Component, OnInit, OnDestroy, ElementRef } from '@angular/core';
 import { ChatService } from './chat.service';
+import { HostListener } from '@angular/core';
+
+
 
 
 @Component({
@@ -22,6 +25,8 @@ export class AppComponent implements OnInit {
       console.log(data);
     });
 
+  
+
    // this.chatService
    // .getMessages()
    // .subscribe((data: string) => {
@@ -30,5 +35,18 @@ export class AppComponent implements OnInit {
     
   }
 
+  @HostListener('window:unload', ['$event'])
+  unloadHandler(event) {
+      this.delete();
+  }
+  
+  @HostListener('window:beforeunload', ['$event'])
+  beforeUnloadHander(event) {
+      return this.delete();
+  }
+  
+  delete() {
+    this.chatService.deleteUser('onDisconnect');
 
+  }
 }

@@ -23,4 +23,6 @@ userSchema.statics.addUser = (user,callback) => {
 
 
 
+
+
 module.exports = model("user",userSchema);

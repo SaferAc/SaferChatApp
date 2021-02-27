@@ -1,6 +1,7 @@
 require('./database');
 var app= require('./app');
 const Message= require('./models/message');
+const User = require('./models/user');
 
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
@@ -20,7 +21,16 @@ io.on("connection", function (socket) {
     Message.addMessage(message, (err, newMsg) => {});
     io.emit('new-message', msg);
    });
-  
+
+   socket.on ('onDisconnect', async(id)=>{
+     try {
+      await  User.findByIdAndDelete(id['id']);
+      io.emit('usersUpdated', msg);
+     } catch (error) {
+       console.log(error);
+     }
+    
+   })
 
 });
 
