@@ -81,9 +81,12 @@ createUser(){
   )
 }
 
-changeUserName(name:string){
+changeUserName(userName:string){
 
-  return this.http.put(this.URL_USERS+this.userId$,name).subscribe(
+  
+
+
+  return this.http.put(this.URL_USERS+this.userId$,{name:userName}).subscribe(
     res=> { 
       this.nombre$= res['name']
       console.log(res)

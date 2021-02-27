@@ -32,22 +32,18 @@ try {
 };
 
 userCtrl.editUser= async (req,res)=>{
-try {
-    
-    await User.findByIdAndUpdate(req.params.id,req.body,function(err, result){
 
-        if(err){
-            res.send(err)
-        }
-        else{
-            res.send(result)
-        }
+    try {
+       
+       
+        const userModify= await User.findByIdAndUpdate(req.params.id,req.body,{new:true,useFindAndModify:true});
+        res.json(userModify);
+        
+    } catch (error) {
 
-    });
-    
-} catch (error) {
-    console.log(error)
-}
+        console.log(error);
+    }
+  
     
 };
 
